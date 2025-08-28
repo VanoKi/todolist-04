@@ -5,7 +5,9 @@ export const App = () => {
 
   return (
     <>
-      <TodolistItem/>
+      <TodolistItem
+        title={'What to do'}
+      />
     </>
   )
 }
