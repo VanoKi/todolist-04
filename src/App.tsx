@@ -1,6 +1,7 @@
 import './App.css'
 import {TodolistItem} from "./components/todolistItem.tsx";
 import {nanoid} from "@reduxjs/toolkit";
+import {useState} from "react";
 
 export type taskType = {
   id: string
@@ -10,24 +11,24 @@ export type taskType = {
 
 export const App = () => {
 
-  const tasks1: taskType[] = [
+  const [tasks, setTasks] = useState<taskType[]>([
     { id: nanoid(), title: 'HTML&CSS', isDone: true },
     { id: nanoid(), title: 'JS', isDone: true },
     { id: nanoid(), title: 'ReactJS', isDone: false },
-  ]
+  ])
 
   const removeTask = (taskId:string) => {
-    alert(taskId)
+    setTasks(tasks.filter(task => task.id !== taskId))
   }
 
   return (
     <>
       <TodolistItem
         title={'What to do'}
-        tasks={tasks1}
+        tasks={tasks}
         removeTask={removeTask}
       />
-      <TodolistItem title={'Another one'} tasks={tasks1}/>
+      <TodolistItem title={'Another one'} tasks={tasks}/>
     </>
   )
 }
