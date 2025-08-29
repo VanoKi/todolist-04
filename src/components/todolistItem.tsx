@@ -25,14 +25,11 @@ export const TodolistItem = (props: Props) => {
               checked={task.isDone}
             />
             <span>{task.title}</span>
-            <button title={'x'}/>
+            <Button title={'x'}/>
           </li>
         ))}
       </ul>)}
       <div>
-        {/*<button>All</button>*/}
-        {/*<button>Active</button>*/}
-        {/*<button>Completed</button>*/}
         <Button title={'All'}/>
         <Button title={'Active'}/>
         <Button title={'Completed'}/>
