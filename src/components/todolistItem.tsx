@@ -2,7 +2,7 @@ import type {taskType} from "../App.tsx";
 
 type Props = {
   title: string
-  tasks: any
+  tasks: taskType[]
 };
 export const TodolistItem = (props: Props) => {
   const {title, tasks} = props
@@ -13,7 +13,10 @@ export const TodolistItem = (props: Props) => {
         <input/>
         <button>+</button>
       </div>
-      <ul>
+      {tasks.length === 0 ?
+        (<p>There are not tasks</p>)
+        :
+        (<ul>
         {tasks.map((task:taskType) => (
           <li key={task.id}>
             <input
@@ -24,7 +27,7 @@ export const TodolistItem = (props: Props) => {
             <button title={'x'}/>
           </li>
         ))}
-      </ul>
+      </ul>)}
       <div>
         <button>All</button>
         <button>Active</button>
