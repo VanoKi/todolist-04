@@ -1,13 +1,14 @@
-import type {taskType} from "../App.tsx";
+import type {filterType, taskType} from "../App.tsx";
 import {Button} from "./Button.tsx";
 
 type Props = {
   title: string
   tasks: taskType[]
-  removeTask?: (taskId:string) => void
+  deleteTask?: (taskId:string) => void
+  setFilter: (filter:filterType) => void
 };
 export const TodolistItem = (props: Props) => {
-  const {title, tasks, removeTask} = props
+  const {title, tasks, deleteTask, setFilter} = props
   return (
     <div>
       <h3>{title}</h3>
@@ -26,14 +27,14 @@ export const TodolistItem = (props: Props) => {
               checked={task.isDone}
             />
             <span>{task.title}</span>
-            <Button title={'x'} onClick={() => removeTask?.(task.id)}/>
+            <Button title={'x'} onClick={() => deleteTask?.(task.id)}/>
           </li>
         ))}
       </ul>)}
       <div>
-        <Button title={'All'}/>
-        <Button title={'Active'}/>
-        <Button title={'Completed'}/>
+        <Button title={'All'} onClick={() => setFilter('All')}/>
+        <Button title={'Active'} onClick={() => setFilter('Active')}/>
+        <Button title={'Completed'} onClick={() => setFilter('Completed')}/>
       </div>
     </div>
   );
