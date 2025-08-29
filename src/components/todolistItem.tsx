@@ -4,9 +4,10 @@ import {Button} from "./Button.tsx";
 type Props = {
   title: string
   tasks: taskType[]
+  removeTask?: (taskId:string) => void
 };
 export const TodolistItem = (props: Props) => {
-  const {title, tasks} = props
+  const {title, tasks, removeTask} = props
   return (
     <div>
       <h3>{title}</h3>
@@ -25,7 +26,7 @@ export const TodolistItem = (props: Props) => {
               checked={task.isDone}
             />
             <span>{task.title}</span>
-            <Button title={'x'}/>
+            <Button title={'x'} onClick={() => removeTask(task.id)}/>
           </li>
         ))}
       </ul>)}

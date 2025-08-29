@@ -16,15 +16,18 @@ export const App = () => {
     { id: nanoid(), title: 'ReactJS', isDone: false },
   ]
 
-  const tasks2: taskType[] = []
+  const removeTask = (taskId:string) => {
+    alert(taskId)
+  }
 
   return (
     <>
       <TodolistItem
         title={'What to do'}
         tasks={tasks1}
+        removeTask={removeTask}
       />
-      <TodolistItem title={'another one'} tasks={tasks2}/>
+      <TodolistItem title={'Another one'} tasks={tasks1}/>
     </>
   )
 }
