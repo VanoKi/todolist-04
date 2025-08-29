@@ -33,7 +33,6 @@ export const App = () => {
       default: return tasks
       }
     }
-  }
 
   return (
     <>
