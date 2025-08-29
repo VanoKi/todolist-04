@@ -1,8 +1,9 @@
 import './App.css'
 import {TodolistItem} from "./components/todolistItem.tsx";
+import {nanoid} from "@reduxjs/toolkit";
 
 export type taskType = {
-  id: number
+  id: string
   title: string
   isDone: boolean
 }
@@ -10,9 +11,9 @@ export type taskType = {
 export const App = () => {
 
   const tasks1: taskType[] = [
-    { id: 1, title: 'HTML&CSS', isDone: true },
-    { id: 2, title: 'JS', isDone: true },
-    { id: 3, title: 'ReactJS', isDone: false },
+    { id: nanoid(), title: 'HTML&CSS', isDone: true },
+    { id: nanoid(), title: 'JS', isDone: true },
+    { id: nanoid(), title: 'ReactJS', isDone: false },
   ]
 
   const tasks2: taskType[] = []
