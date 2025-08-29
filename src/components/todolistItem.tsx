@@ -26,7 +26,7 @@ export const TodolistItem = (props: Props) => {
               checked={task.isDone}
             />
             <span>{task.title}</span>
-            <Button title={'x'} onClick={() => removeTask(task.id)}/>
+            <Button title={'x'} onClick={() => removeTask?.(task.id)}/>
           </li>
         ))}
       </ul>)}
