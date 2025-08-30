@@ -23,8 +23,8 @@ export const App = () => {
   const deleteTask = (taskId:string) => {
     setTasks(tasks.filter(task => task.id !== taskId))
   }
-  const addTask = () => {
-    const newTask = {id: nanoid3(), title: 'new task', isDone: false}
+  const addTask = (task:string) => {
+    const newTask = {id: nanoid3(), title: task, isDone: false}
     setTasks([newTask, ...tasks])
   }
   const filterTasks = (filter:filterType):taskType[] => {
