@@ -14,7 +14,7 @@ export const TodolistItem = (props: Props) => {
       <h3>{title}</h3>
       <div>
         <input/>
-        <button>+</button>
+        <Button title={'+'} onClick={() => alert('click')}/>
       </div>
       {tasks.length === 0 ?
         (<p>There are not tasks</p>)
