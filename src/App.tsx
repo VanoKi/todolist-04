@@ -12,19 +12,19 @@ export type filterType = 'All' | 'Active' | 'Completed'
 
 export const App = () => {
 
-  const nanoid3 = nanoid(3)
+  const nanoid3 = () => nanoid(3)
   const [filter, setFilter] = useState<filterType>('All')
   const [tasks, setTasks] = useState<taskType[]>([
-    { id: nanoid3, title: 'HTML&CSS', isDone: true },
-    { id: nanoid3, title: 'JS', isDone: true },
-    { id: nanoid3, title: 'ReactJS', isDone: false },
+    { id: nanoid3(), title: 'HTML&CSS', isDone: true },
+    { id: nanoid3(), title: 'JS', isDone: true },
+    { id: nanoid3(), title: 'ReactJS', isDone: false },
   ])
 
   const deleteTask = (taskId:string) => {
     setTasks(tasks.filter(task => task.id !== taskId))
   }
   const addTask = () => {
-    const newTask = {id: nanoid3, title: 'new task', isDone: false}
+    const newTask = {id: nanoid3(), title: 'new task', isDone: false}
     setTasks([newTask, ...tasks])
   }
   const filterTasks = (filter:filterType):taskType[] => {
