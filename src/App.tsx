@@ -22,6 +22,9 @@ export const App = () => {
   const deleteTask = (taskId:string) => {
     setTasks(tasks.filter(task => task.id !== taskId))
   }
+  const addTask = () => {
+    alert('add task')
+  }
   const filterTasks = (filter:filterType):taskType[] => {
     switch (filter) {
       case 'Active': {
@@ -41,6 +44,7 @@ export const App = () => {
         tasks={filterTasks(filter)}
         deleteTask={deleteTask}
         setFilter={setFilter}
+        addTask={addTask}
       />
     </>
   )

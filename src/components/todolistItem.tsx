@@ -6,15 +6,16 @@ type Props = {
   tasks: taskType[]
   deleteTask?: (taskId:string) => void
   setFilter: (filter:filterType) => void
+  addTask: () => void
 };
 export const TodolistItem = (props: Props) => {
-  const {title, tasks, deleteTask, setFilter} = props
+  const {title, tasks, deleteTask, setFilter, addTask} = props
   return (
     <div>
       <h3>{title}</h3>
       <div>
         <input/>
-        <Button title={'+'} onClick={() => alert('click')}/>
+        <Button title={'+'} onClick={addTask}/>
       </div>
       {tasks.length === 0 ?
         (<p>There are not tasks</p>)
