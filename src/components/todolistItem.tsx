@@ -20,7 +20,10 @@ export const TodolistItem = (props: Props) => {
       <h3>{title}</h3>
       <div>
         <input value={taskTitle} onChange={e => setTaskTitle(e.currentTarget.value)}/>
-        <Button title={'+'} onClick={() => addTask(taskTitle)}/>
+        <Button title={'+'} onClick={() => {
+          addTask(taskTitle)
+          setTaskTitle('')
+        }}/>
       </div>
       {tasks.length === 0 ?
         (<p>There are not tasks</p>)
