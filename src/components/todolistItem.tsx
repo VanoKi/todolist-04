@@ -1,6 +1,6 @@
 import type {filterType, taskType} from "../App.tsx";
 import {Button} from "./Button.tsx";
-import {type ChangeEvent, useState} from "react";
+import {type ChangeEvent, KeyboardEvent, useState} from "react";
 
 type Props = {
   title: string
@@ -14,13 +14,13 @@ export const TodolistItem = (props: Props) => {
 
   const {title, tasks, deleteTask, setFilter, addTask} = props
   const [taskTitle, setTaskTitle] = useState('')
-  const createTaskHandler = (e:ChangeEvent<HTMLInputElement>): void => {
+  const createTaskHandler = (): void => {
     addTask(taskTitle)
     setTaskTitle('')
   }
   const keyDownHandler = (e:KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      createTaskHandler(e)
+      createTaskHandler()
     }
     if (e.key === 'Escape') {
       setTaskTitle('')
