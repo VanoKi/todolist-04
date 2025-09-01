@@ -1,6 +1,6 @@
 import type {filterType, taskType} from "../App.tsx";
 import {Button} from "./Button.tsx";
-import {useRef, useState} from "react";
+import {useState} from "react";
 
 type Props = {
   title: string
