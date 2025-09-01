@@ -38,6 +38,9 @@ export const App = () => {
       default: return tasks
       }
     }
+  const changeTaskStatus =(taskId:string, isDone: boolean) => {
+    setTasks(tasks.map(task => task.id === taskId ? {...task, isDone} : task))
+  }
 
   return (
     <>
@@ -47,6 +50,7 @@ export const App = () => {
         deleteTask={deleteTask}
         setFilter={setFilter}
         addTask={addTask}
+        changeTaskStatus={changeTaskStatus}
       />
     </>
   )
