@@ -5,7 +5,7 @@ import {type ChangeEvent, KeyboardEvent, useState} from "react";
 type Props = {
   title: string
   tasks: taskType[]
-  deleteTask?: (taskId:string) => void
+  deleteTask: (taskId:string) => void
   setFilter: (filter:filterType) => void
   addTask: (task:string) => void
 };
@@ -41,16 +41,20 @@ export const TodolistItem = (props: Props) => {
         (<p>There are not tasks</p>)
         :
         (<ul>
-        {tasks.map((task:taskType) => (
+        {tasks.map((task:taskType) => {
+            const deleteTaskHandler = () => {deleteTask(task.id)}
+            return (
           <li key={task.id}>
             <input
               type={"checkbox"}
               checked={task.isDone}
             />
             <span>{task.title}</span>
-            <Button title={'x'} onClick={() => deleteTask?.(task.id)}/>
+            <Button title={'x'} onClick={deleteTaskHandler}/>
           </li>
-        ))}
+        )
+        }
+        )}
       </ul>)}
       <div>
         <Button title={'All'} onClick={() => setFilter('All')}/>
