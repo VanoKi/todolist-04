@@ -14,22 +14,25 @@ export const TodolistItem = (props: Props) => {
 
   const {title, tasks, deleteTask, setFilter, addTask} = props
   const [taskTitle, setTaskTitle] = useState('')
-  const createTaskHandler = (e:ChangeEvent<HTMLInputElement>) => {
+  const createTaskHandler = (e:ChangeEvent<HTMLInputElement>): void => {
     addTask(taskTitle)
     setTaskTitle('')
   }
-  // const keyDownHandler = (e:KeyboardEvent<HTMLInputElement>) => {
-  //   if (e.key === 'Enter') {
-  //
-  //   }
-  // }
+  const keyDownHandler = (e:KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      createTaskHandler(e)
+    }
+    if (e.key === 'Escape') {
+      setTaskTitle('')
+    }
+  }
 
   return (
     <div>
       <h3>{title}</h3>
       <div>
         <input value={taskTitle}
-               onKeyDown={(e) => {}}
+               onKeyDown={keyDownHandler}
                onChange={e => setTaskTitle(e.currentTarget.value)}
         />
         <Button title={'+'} onClick={createTaskHandler}/>
