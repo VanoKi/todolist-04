@@ -51,8 +51,8 @@ export const App = () => {
         setFilter={setFilter}
         addTask={addTask}
         changeTaskStatus={changeTaskStatus}
+        filter={filter}
       />
     </>
   )
 }
-
