@@ -40,3 +40,12 @@
 .read-the-docs {
   color: #888;
 }
+
+.error {
+  border: red 1px solid;
+}
+
+.error-message {
+  color: red;
+}
+
