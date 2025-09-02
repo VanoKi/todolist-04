@@ -17,8 +17,11 @@ export const TodolistItem = (props: Props) => {
   const [taskTitle, setTaskTitle] = useState('')
 
   const createTaskHandler = (): void => {
-    addTask(taskTitle)
-    setTaskTitle('')
+    const trimmedTitle = taskTitle.trim()
+    if (trimmedTitle !== '') {
+      addTask(taskTitle)
+      setTaskTitle('')
+    }
   }
   const keyDownHandler = (e:KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
