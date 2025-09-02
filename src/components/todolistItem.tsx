@@ -1,4 +1,4 @@
-import type {filterType, taskType} from "../App.tsx";
+import type {taskType} from "../App.tsx";
 import {Button} from "./Button.tsx";
 import {type ChangeEvent, type KeyboardEvent, useState} from "react";
 
@@ -6,17 +6,18 @@ type Props = {
   title: string
   tasks: taskType[]
   deleteTask: (taskId:string) => void
-  setFilter: (filter: filterType) => void
   addTask: (task:string) => void
   changeTaskStatus: (taskId:string, isDone:boolean) => void
-  filter: filterType
 };
+export type filterType = 'All' | 'Active' | 'Completed'
 
 export const TodolistItem = (props: Props) => {
-  const {title, tasks, deleteTask, setFilter, addTask, changeTaskStatus, filter} = props
+  const {title, tasks, deleteTask, addTask, changeTaskStatus} = props
   const filters:filterType[] = ['All' , 'Active' , 'Completed']
   const [taskTitle, setTaskTitle] = useState('')
   const [error, setError] = useState<string | null>(null)
+  const [filter, setFilter] = useState<filterType>('All')
+
 
   const createTaskHandler = (): void => {
     const trimmedTitle = taskTitle.trim()
@@ -39,6 +40,17 @@ export const TodolistItem = (props: Props) => {
     setTaskTitle(event.currentTarget.value)
     setError(null)
   }
+  const filterTasks = (filter:filterType):taskType[] => {
+    switch (filter) {
+      case 'Active': {
+        return tasks.filter(task => task.isDone === false)
+      }
+      case 'Completed': {
+        return tasks.filter(task => task.isDone === true)
+      }
+      default: return tasks
+    }
+  }
 
   return (
     <div>
@@ -56,7 +68,7 @@ export const TodolistItem = (props: Props) => {
         (<p>There are not tasks</p>)
         :
         (<ul>
-        {tasks.map((task:taskType) => {
+        {filterTasks(filter).map((task:taskType) => {
             const deleteTaskHandler = () => {deleteTask(task.id)}
             const changeTaskStatusHandler = (e:ChangeEvent<HTMLInputElement>) => {
               const newStatusValue = e.currentTarget.checked

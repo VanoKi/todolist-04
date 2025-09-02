@@ -8,12 +8,10 @@ export type taskType = {
   title: string
   isDone: boolean
 }
-export type filterType = 'All' | 'Active' | 'Completed'
 
 export const App = () => {
 
   const nanoid3 = () => nanoid(3)
-  const [filter, setFilter] = useState<filterType>('All')
   const [tasks, setTasks] = useState<taskType[]>([
     { id: nanoid3(), title: 'HTML&CSS', isDone: true },
     { id: nanoid3(), title: 'JS', isDone: true },
@@ -27,17 +25,6 @@ export const App = () => {
     const newTask = {id: nanoid3(), title: task, isDone: false}
     setTasks([newTask, ...tasks])
   }
-  const filterTasks = (filter:filterType):taskType[] => {
-    switch (filter) {
-      case 'Active': {
-        return tasks.filter(task => task.isDone === false)
-      }
-      case 'Completed': {
-        return tasks.filter(task => task.isDone === true)
-      }
-      default: return tasks
-      }
-    }
   const changeTaskStatus =(taskId:string, isDone: boolean) => {
     setTasks(tasks.map(task => task.id === taskId ? {...task, isDone} : task))
   }
@@ -46,12 +33,10 @@ export const App = () => {
     <>
       <TodolistItem
         title={'What to do'}
-        tasks={filterTasks(filter)}
+        tasks={tasks}
         deleteTask={deleteTask}
-        setFilter={setFilter}
         addTask={addTask}
         changeTaskStatus={changeTaskStatus}
-        filter={filter}
       />
     </>
   )
