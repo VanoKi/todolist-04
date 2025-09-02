@@ -34,6 +34,10 @@ export const TodolistItem = (props: Props) => {
       setTaskTitle('')
     }
   }
+  const changeTaskTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setTaskTitle(event.currentTarget.value)
+    setError(null)
+  }
 
   return (
     <div>
@@ -41,7 +45,7 @@ export const TodolistItem = (props: Props) => {
       <div>
         <input value={taskTitle}
                onKeyDown={keyDownHandler}
-               onChange={e => setTaskTitle(e.currentTarget.value)}
+               onChange={changeTaskTitleHandler}
                className={error ? 'error' : ''}
         />
         <Button title={'+'} onClick={createTaskHandler}/>
