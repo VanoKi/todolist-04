@@ -12,14 +12,16 @@ type Props = {
 export const TodolistItem = (props: Props) => {
   const {title, tasks, deleteTask, changeTaskStatus, addTask} = props
   const filterBtns:filterType[] = ['all', 'active', 'completed']
-  const [inputTitle, setInputTitle] = useState('')
+  const [inputTitle, setInputTitle] = useState<string>('')
+  const [error, setError] = useState<null|string>(null)
   const addTaskHandler = () => {
     const trimmedTitle = inputTitle.trim()
     if (trimmedTitle) {
       addTask(trimmedTitle)
       setInputTitle('')
+      setError(null)
     } else {
-
+      setError('Title is required')
     }
   }
 
@@ -32,6 +34,7 @@ export const TodolistItem = (props: Props) => {
           onChange={(e) => setInputTitle(e.currentTarget.value)}
         />
         <Button title={'+'} onClick={addTaskHandler}/>
+        {error && <div>Title is required</div>}
       </div>
       <ul>
         {tasks.length > 0 ? (
@@ -39,7 +42,6 @@ export const TodolistItem = (props: Props) => {
             const deleteTaskHandler = () => {
               deleteTask(task.id)
             }
-
             return (
               <li key={task.id}>
                 <input
