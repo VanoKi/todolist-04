@@ -30,11 +30,16 @@ export function App() {
     { id: nanoid3(), title: 'ReactJS', isDone: false },
   ])
 
+  const deleteTask = (taskId:string) => {
+    setTasks(tasks.filter(task => task.id !== taskId))
+  }
+
   return (
     <>
       <TodolistItem
         title={'What to learn'}
         tasks={tasks}
+        deleteTask={deleteTask}
       />
     </>
   )
