@@ -1,6 +1,6 @@
 import type {filterType, taskType} from "../App.tsx";
 import {Button} from "./Button.tsx";
-import {useState} from "react";
+import {useState, type KeyboardEvent} from "react";
 
 type Props = {
   title:string
@@ -24,7 +24,7 @@ export const TodolistItem = (props: Props) => {
       setError('Title is required')
     }
   }
-  const onKeyDownHanlder = (e) => {
+  const onKeyDownHanlder = (e:KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       addTaskHandler()
     }
