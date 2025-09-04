@@ -34,7 +34,7 @@ export const TodolistItem = (props: Props) => {
       setInputTitle('')
     }
   }
-  const filtredTasks =(filter:filterType) => {
+  const filteredTasks =(filter:filterType) => {
     switch (filter) {
       case 'active': {
         return tasks.filter(task => !task.isDone )
@@ -45,7 +45,7 @@ export const TodolistItem = (props: Props) => {
       default: return tasks
     }
   }
-  const filtred = filtredTasks(filter)
+  const filtered = filteredTasks(filter)
 
   return (
     <div>
@@ -60,8 +60,8 @@ export const TodolistItem = (props: Props) => {
         {error && <div>{error}</div>}
       </div>
       <ul>
-        {filtred.length > 0 ? (
-          filtred.map(task => {
+        {filtered.length > 0 ? (
+          filtered.map(task => {
             const deleteTaskHandler = () => {
               deleteTask(task.id)
             }
