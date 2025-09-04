@@ -1,6 +1,7 @@
 import './App.css'
 import {useState} from "react";
 import {nanoid} from "@reduxjs/toolkit";
+import {TodolistItem} from "./components/TodolistItem.tsx";
 
 export type filterType = 'all' | 'active' | 'completed'
 export type Todolist ={
@@ -31,7 +32,10 @@ export function App() {
 
   return (
     <>
-
+      <TodolistItem
+        title={'What to learn'}
+        tasks={tasks}
+      />
     </>
   )
 }
