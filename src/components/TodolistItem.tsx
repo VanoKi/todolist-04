@@ -1,4 +1,4 @@
-import type {taskType} from "../App.tsx";
+import type {filterType, taskType} from "../App.tsx";
 import {Button} from "./Button.tsx";
 
 type Props = {
@@ -7,9 +7,10 @@ type Props = {
 };
 export const TodolistItem = (props: Props) => {
   const {title, tasks,} = props
+  const filterBtns:filterType[] = ['all', 'active', 'completed']
   return (
     <div>
-      <h3>{title}</h3>
+      <h2>{title}</h2>
       <div>
         <input/>
         <Button title={'+'} onClick={() => {}}/>
@@ -29,6 +30,13 @@ export const TodolistItem = (props: Props) => {
           <div>There are not tasks</div>
         )}
       </ul>
+      <div>
+        {filterBtns.map(bnt => {
+          return (
+            <Button title={bnt} onClick={() => {}}/>
+          )
+        })}
+      </div>
     </div>
   );
 };
