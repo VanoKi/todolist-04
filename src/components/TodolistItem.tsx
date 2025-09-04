@@ -24,7 +24,7 @@ export const TodolistItem = (props: Props) => {
       setError('Title is required')
     }
   }
-  const onKeyDownHanlder = (e:KeyboardEvent<HTMLInputElement>) => {
+  const onKeyDownHandler = (e:KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       addTaskHandler()
     }
@@ -40,7 +40,7 @@ export const TodolistItem = (props: Props) => {
         <input
           value={inputTitle}
           onChange={(e) => setInputTitle(e.currentTarget.value)}
-          onKeyDown={onKeyDownHanlder}
+          onKeyDown={onKeyDownHandler}
         />
         <Button title={'+'} onClick={addTaskHandler}/>
         {error && <div>{error}</div>}
