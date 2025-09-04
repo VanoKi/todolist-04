@@ -5,7 +5,7 @@ type Props = {
   title:string
   tasks: taskType[]
   deleteTask: (taskId:string) => void
-  changeTaskStatus: (taskId:string) => void
+  changeTaskStatus: (taskId:string, checked:boolean) => void
   addTask: () => void
 };
 export const TodolistItem = (props: Props) => {
@@ -25,12 +25,13 @@ export const TodolistItem = (props: Props) => {
             const deleteTaskHandler = () => {
               deleteTask(task.id)
             }
+
             return (
               <li key={task.id}>
                 <input
                   type={"checkbox"}
                   checked={task.isDone}
-                  onChange={() => changeTaskStatus(task.id)}
+                  onChange={(e) => changeTaskStatus(task.id, e.currentTarget.checked)}
                 />
                 <span>{task.title}</span>
                 <Button title={'x'} onClick={deleteTaskHandler}/>
