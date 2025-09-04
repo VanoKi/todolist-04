@@ -10,6 +10,10 @@ export const TodolistItem = (props: Props) => {
   return (
     <div>
       <h3>{title}</h3>
+      <div>
+        <input/>
+        <Button title={'+'} onClick={() => {}}/>
+      </div>
       <ul>
         {tasks.length > 0 ? (
           tasks.map(task => {
