@@ -43,7 +43,7 @@ export const TodolistItem = (props: Props) => {
           onKeyDown={onKeyDownHanlder}
         />
         <Button title={'+'} onClick={addTaskHandler}/>
-        {error && <div>Title is required</div>}
+        {error && <div>{error}</div>}
       </div>
       <ul>
         {tasks.length > 0 ? (
