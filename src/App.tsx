@@ -21,8 +21,8 @@ export function App() {
   const nanoid3 = () => nanoid(3)
   const nanoid5 = () => nanoid(5)
   const [todolist, setTodolists] = useState<Todolist[]>([
-    {id:nanoid5(), title: 'What to learn', filter: "All"},
-    {id:nanoid5(), title: 'What to do', filter: "All"}
+    {id:nanoid5(), title: 'What to learn', filter: "all"},
+    {id:nanoid5(), title: 'What to do', filter: "all"}
   ])
   const [tasks, setTasks] = useState<taskType[]>([
     { id: nanoid3(), title: 'HTML&CSS', isDone: true },
@@ -34,7 +34,7 @@ export function App() {
     setTasks(tasks.filter(task => task.id !== taskId))
   }
   const changeTaskStatus = (taskId:string) => {
-    setTasks(tasks.map(task => task.id === taskId ? {...task, isDone: !isDone } : task))
+    setTasks(tasks.map(task => task.id === taskId ? {...task, isDone: !task.isDone } : task))
   }
 
   return (
