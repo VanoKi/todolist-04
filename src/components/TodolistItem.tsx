@@ -6,20 +6,25 @@ type Props = {
   tasks: taskType[]
   deleteTask: (taskId:string) => void
   changeTaskStatus: (taskId:string) => void
+  addTask: () => void
 };
 export const TodolistItem = (props: Props) => {
-  const {title, tasks, deleteTask, changeTaskStatus} = props
+  const {title, tasks, deleteTask, changeTaskStatus, addTask} = props
   const filterBtns:filterType[] = ['all', 'active', 'completed']
+
   return (
     <div>
       <h2>{title}</h2>
       <div>
-        <input/>
+        <input value={''}/>
         <Button title={'+'} onClick={() => {}}/>
       </div>
       <ul>
         {tasks.length > 0 ? (
           tasks.map(task => {
+            const deleteTaskHandler = () => {
+              deleteTask(task.id)
+            }
             return (
               <li key={task.id}>
                 <input
@@ -28,7 +33,7 @@ export const TodolistItem = (props: Props) => {
                   onChange={() => changeTaskStatus(task.id)}
                 />
                 <span>{task.title}</span>
-                <Button title={'x'} onClick={() => deleteTask(task.id)}/>
+                <Button title={'x'} onClick={deleteTaskHandler}/>
               </li>
             )
           })
