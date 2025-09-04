@@ -14,6 +14,8 @@ export const TodolistItem = (props: Props) => {
   const filterBtns:filterType[] = ['all', 'active', 'completed']
   const [inputTitle, setInputTitle] = useState<string>('')
   const [error, setError] = useState<null|string>(null)
+  const [filter, setFilter] = useState<filterType>('all')
+
   const addTaskHandler = () => {
     const trimmedTitle = inputTitle.trim()
     if (trimmedTitle) {
@@ -32,6 +34,18 @@ export const TodolistItem = (props: Props) => {
       setInputTitle('')
     }
   }
+  const filtredTasks =(filter:filterType) => {
+    switch (filter) {
+      case 'active': {
+        return tasks.filter(task => !task.isDone )
+      }
+      case 'completed': {
+        return tasks.filter(task => task.isDone)
+      }
+      default: return tasks
+    }
+  }
+  const filtred = filtredTasks(filter)
 
   return (
     <div>
@@ -46,8 +60,8 @@ export const TodolistItem = (props: Props) => {
         {error && <div>{error}</div>}
       </div>
       <ul>
-        {tasks.length > 0 ? (
-          tasks.map(task => {
+        {filtred.length > 0 ? (
+          filtred.map(task => {
             const deleteTaskHandler = () => {
               deleteTask(task.id)
             }
@@ -70,7 +84,7 @@ export const TodolistItem = (props: Props) => {
       <div>
         {filterBtns.map(btn => {
           return (
-            <Button title={btn} onClick={() => {}} key={btn}/>
+            <Button title={btn} onClick={() => setFilter(btn)} key={btn}/>
           )
         })}
       </div>
