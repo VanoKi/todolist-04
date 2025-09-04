@@ -1,6 +1,6 @@
 import type {filterType, taskType} from "../App.tsx";
 import {Button} from "./Button.tsx";
-import {useState, type KeyboardEvent} from "react";
+import {useState, type KeyboardEvent, type ChangeEvent} from "react";
 
 type Props = {
   title:string
@@ -34,6 +34,12 @@ export const TodolistItem = (props: Props) => {
       setInputTitle('')
     }
   }
+  const onChangeHandler = (e:ChangeEvent<HTMLInputElement>) => {
+    setInputTitle(e.currentTarget.value)
+    if (error !== null) {
+      setError(null)
+    }
+  }
   const filteredTasks =(filter:filterType) => {
     switch (filter) {
       case 'active': {
@@ -53,7 +59,7 @@ export const TodolistItem = (props: Props) => {
       <div>
         <input
           value={inputTitle}
-          onChange={(e) => setInputTitle(e.currentTarget.value)}
+          onChange={onChangeHandler}
           onKeyDown={onKeyDownHandler}
         />
         <Button title={'+'} onClick={addTaskHandler}/>
@@ -78,7 +84,7 @@ export const TodolistItem = (props: Props) => {
             )
           })
         ) : (
-          <div>There are not tasks</div>
+          <p>Task list is empty</p>
         )}
       </ul>
       <div>
