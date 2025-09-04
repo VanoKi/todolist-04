@@ -36,8 +36,9 @@ export function App() {
   const changeTaskStatus = (taskId:string, checked: boolean) => {
     setTasks(tasks.map(task => task.id === taskId ? {...task, isDone: checked } : task))
   }
-  const addTask =(taskTitle:string) => {
-
+  const addTask =(inputTitle:string) => {
+    const newTask:taskType = {id: nanoid3(), title: inputTitle, isDone: false}
+    setTasks([newTask, ...tasks])
   }
 
   return (
