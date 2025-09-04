@@ -33,6 +33,9 @@ export function App() {
   const deleteTask = (taskId:string) => {
     setTasks(tasks.filter(task => task.id !== taskId))
   }
+  const changeTaskStatus = (taskId:string) => {
+    setTasks(tasks.map(task => task.id === taskId ? {...task, isDone: !isDone } : task))
+  }
 
   return (
     <>
@@ -40,6 +43,7 @@ export function App() {
         title={'What to learn'}
         tasks={tasks}
         deleteTask={deleteTask}
+        changeTaskStatus={changeTaskStatus}
       />
     </>
   )
