@@ -15,38 +15,38 @@ export type Todolist = {
 }
 
 export const App = () => {
-
-  const nanoid3 = () => nanoid(3)
-  const nanoid5 = () => nanoid(5)
-
-  const todolistId1 = nanoid5()
-  const todolistId2 = nanoid5()
+  const todolistId1 = nanoid()
+  const todolistId2 = nanoid()
   const [todolists, setTodolists] = useState<Todolist[]>([
     {id:todolistId1, title: 'What to learn', filter: "All"},
     {id:todolistId2, title: 'What to do', filter: "All"}
   ])
   const [tasks, setTasks] = useState({
     [todolistId1]:[
-      { id: nanoid3(), title: 'HTML&CSS', isDone: true },
-      { id: nanoid3(), title: 'JS', isDone: true },
-      { id: nanoid3(), title: 'ReactJS', isDone: false },
+      { id: nanoid(), title: 'HTML&CSS', isDone: true },
+      { id: nanoid(), title: 'JS', isDone: true },
+      { id: nanoid(), title: 'ReactJS', isDone: false },
     ],
     [todolistId2]:[
-      { id: nanoid3(), title: 'Rest API', isDone: true },
-      { id: nanoid3(), title: 'GraphQL', isDone: false },
+      { id: nanoid(), title: 'Rest API', isDone: true },
+      { id: nanoid(), title: 'GraphQL', isDone: false },
     ]
   })
 
-  const deleteTask = (taskId:string) => {
-    setTasks(tasks.filter(task => task.id !== taskId))
+  const deleteTask = (todolistId: string, taskId:string) => {
+    // setTasks({...tasks, [todolistId]:[...]})
+    const tlTasks = tasks[todolistId]
+    const newTlTasks = tlTasks.filter(t => t.id !== taskId)
+    tasks[todolistId] = newTlTasks
+    setTasks({...tasks})
   }
-  const addTask = (task:string) => {
-    const newTask = {id: nanoid3(), title: task, isDone: false}
-    setTasks([newTask, ...tasks])
-  }
-  const changeTaskStatus =(taskId:string, isDone: boolean) => {
-    setTasks(tasks.map(task => task.id === taskId ? {...task, isDone} : task))
-  }
+  // const addTask = (task:string) => {
+  //   const newTask = {id: nanoid3(), title: task, isDone: false}
+  //   setTasks([newTask, ...tasks])
+  // }
+  // const changeTaskStatus =(taskId:string, isDone: boolean) => {
+  //   setTasks(tasks.map(task => task.id === taskId ? {...task, isDone} : task))
+  // }
 
   return (
     <>
@@ -54,11 +54,12 @@ export const App = () => {
         return (
           <TodolistItem
             key={tl.id}
+            todolistId={tl.id}
             title={tl.title}
-            tasks={tasks}
+            tasks={tasks[tl.id]}
             deleteTask={deleteTask}
-            addTask={addTask}
-            changeTaskStatus={changeTaskStatus}
+            // addTask={addTask}
+            // changeTaskStatus={changeTaskStatus}
           />
         )
       })}

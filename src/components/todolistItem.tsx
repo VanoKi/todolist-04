@@ -3,21 +3,21 @@ import {Button} from "./Button.tsx";
 import {type ChangeEvent, type KeyboardEvent, useState} from "react";
 
 type Props = {
+  todolistId: string
   title: string
   tasks: taskType[]
-  deleteTask: (taskId:string) => void
+  deleteTask: (todolistId: string, taskId:string) => void
   addTask: (task:string) => void
   changeTaskStatus: (taskId:string, isDone:boolean) => void
 };
 export type filterType = 'All' | 'Active' | 'Completed'
 
 export const TodolistItem = (props: Props) => {
-  const {title, tasks, deleteTask, addTask, changeTaskStatus} = props
+  const {todolistId, title, tasks, deleteTask, addTask, changeTaskStatus} = props
   const filters:filterType[] = ['All' , 'Active' , 'Completed']
   const [taskTitle, setTaskTitle] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [filter, setFilter] = useState<filterType>('All')
-
 
   const createTaskHandler = (): void => {
     const trimmedTitle = taskTitle.trim()
@@ -69,7 +69,7 @@ export const TodolistItem = (props: Props) => {
         :
         (<ul>
         {filterTasks(filter).map((task:taskType) => {
-            const deleteTaskHandler = () => {deleteTask(task.id)}
+            const deleteTaskHandler = () => {deleteTask(todolistId, task.id)}
             const changeTaskStatusHandler = (e:ChangeEvent<HTMLInputElement>) => {
               const newStatusValue = e.currentTarget.checked
               changeTaskStatus(task.id, newStatusValue)
