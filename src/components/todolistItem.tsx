@@ -51,6 +51,7 @@ export const TodolistItem = (props: Props) => {
       default: return tasks
     }
   }
+  const filtered = filterTasks(filter)
 
   return (
     <div>
@@ -64,11 +65,11 @@ export const TodolistItem = (props: Props) => {
         <Button title={'+'} onClick={createTaskHandler}/>
         {error && <div className={'error-message'}>{error}</div>}
       </div>
-      {tasks.length === 0 ?
+      {filtered.length === 0 ?
         (<p>There are not tasks</p>)
         :
         (<ul>
-        {filterTasks(filter).map((task:taskType) => {
+        {filtered.map((task:taskType) => {
             const deleteTaskHandler = () => {deleteTask(todolistId, task.id)}
             const changeTaskStatusHandler = (e:ChangeEvent<HTMLInputElement>) => {
               const newStatusValue = e.currentTarget.checked

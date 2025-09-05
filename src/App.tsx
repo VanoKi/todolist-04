@@ -34,11 +34,7 @@ export const App = () => {
   })
 
   const deleteTask = (todolistId: string, taskId:string) => {
-    // setTasks({...tasks, [todolistId]:[...]})
-    const tlTasks = tasks[todolistId]
-    const newTlTasks = tlTasks.filter(t => t.id !== taskId)
-    tasks[todolistId] = newTlTasks
-    setTasks({...tasks})
+    setTasks({...tasks, [todolistId]:tasks[todolistId].filter(task => task.id !== taskId)})
   }
   // const addTask = (task:string) => {
   //   const newTask = {id: nanoid3(), title: task, isDone: false}
