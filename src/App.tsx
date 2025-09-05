@@ -36,12 +36,11 @@ export const App = () => {
   const deleteTask = (todolistId: string, taskId:string) => {
     setTasks({...tasks, [todolistId]:tasks[todolistId].filter(task => task.id !== taskId)})
   }
-  const addTask = (todolistId: string, task:string) => {
+  const addTask = (todolistId:string, task:string) => {
     const newTask = {id: nanoid(), title: task, isDone: false}
-    setTasks({...tasks, [todolistId]:tasks[todolistId]})
+    setTasks({...tasks, [todolistId]:[newTask, ...tasks[todolistId]] })
   }
   const changeTaskStatus =(todolistId: string, taskId:string, isDone: boolean) => {
-    // setTasks(tasks.map(task => task.id === taskId ? {...task, isDone} : task))
     setTasks({...tasks, [todolistId]:tasks[todolistId]
         .map(task => task.id === taskId ? {...task, isDone} : task)})
   }
