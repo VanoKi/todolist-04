@@ -36,13 +36,15 @@ export const App = () => {
   const deleteTask = (todolistId: string, taskId:string) => {
     setTasks({...tasks, [todolistId]:tasks[todolistId].filter(task => task.id !== taskId)})
   }
-  // const addTask = (task:string) => {
-  //   const newTask = {id: nanoid3(), title: task, isDone: false}
-  //   setTasks([newTask, ...tasks])
-  // }
-  // const changeTaskStatus =(taskId:string, isDone: boolean) => {
-  //   setTasks(tasks.map(task => task.id === taskId ? {...task, isDone} : task))
-  // }
+  const addTask = (todolistId: string, task:string) => {
+    const newTask = {id: nanoid(), title: task, isDone: false}
+    setTasks({...tasks, [todolistId]:tasks[todolistId]})
+  }
+  const changeTaskStatus =(todolistId: string, taskId:string, isDone: boolean) => {
+    // setTasks(tasks.map(task => task.id === taskId ? {...task, isDone} : task))
+    setTasks({...tasks, [todolistId]:tasks[todolistId]
+        .map(task => task.id === taskId ? {...task, isDone} : task)})
+  }
 
   return (
     <>
@@ -54,8 +56,8 @@ export const App = () => {
             title={tl.title}
             tasks={tasks[tl.id]}
             deleteTask={deleteTask}
-            // addTask={addTask}
-            // changeTaskStatus={changeTaskStatus}
+            addTask={addTask}
+            changeTaskStatus={changeTaskStatus}
           />
         )
       })}
