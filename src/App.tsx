@@ -18,17 +18,23 @@ export type taskType = {
 
 export function App() {
 
-  const nanoid3 = () => nanoid(3)
-  const nanoid5 = () => nanoid(5)
+  const todolistId1 =  nanoid()
+  const todolistId2 =  nanoid()
   const [todolists, setTodolists] = useState<Todolist[]>([
-    {id:nanoid5(), title: 'What to learn', filter: "all"},
-    {id:nanoid5(), title: 'What to do', filter: "all"}
+    {id:todolistId1, title: 'What to learn', filter: "all"},
+    {id:todolistId2, title: 'What to do', filter: "all"}
   ])
-  const [tasks, setTasks] = useState<taskType[]>([
-    { id: nanoid3(), title: 'HTML&CSS', isDone: true },
-    { id: nanoid3(), title: 'JS', isDone: true },
-    { id: nanoid3(), title: 'ReactJS', isDone: false },
-  ])
+  const [tasks, setTasks] = useState({
+    [todolistId1]: [
+      { id: nanoid(), title: 'HTML&CSS', isDone: true },
+      { id: nanoid(), title: 'JS', isDone: true },
+      { id: nanoid(), title: 'ReactJS', isDone: false },
+    ],
+    [todolistId2]: [
+      { id: nanoid(), title: 'Rest API', isDone: true },
+      { id: nanoid(), title: 'GraphQL', isDone: false },
+    ],
+  })
 
   const deleteTask = (taskId:string) => {
     setTasks(tasks.filter(task => task.id !== taskId))
@@ -37,8 +43,15 @@ export function App() {
     setTasks(tasks.map(task => task.id === taskId ? {...task, isDone: checked } : task))
   }
   const addTask =(inputTitle:string) => {
-    const newTask:taskType = {id: nanoid3(), title: inputTitle, isDone: false}
+    const newTask:taskType = {id: nanoid(), title: inputTitle, isDone: false}
     setTasks([newTask, ...tasks])
+  }
+
+  // const addTodolist = (title:string) => {
+  //
+  // }
+  const deleteTodolist = (todolistId:string) => {
+    setTodolists(todolists.filter(tl => tl.id !== todolistId))
   }
 
   return (
@@ -46,11 +59,14 @@ export function App() {
       {todolists.map(tl => {
         return (
           <TodolistItem
+            key={tl.id}
+            todolistId={tl.id}
             title={tl.title}
-            tasks={tasks}
+            tasks={tasks[tl.id]}
             deleteTask={deleteTask}
             changeTaskStatus={changeTaskStatus}
             addTask={addTask}
+            deleteTodolist={deleteTodolist}
           />
         )
       })}

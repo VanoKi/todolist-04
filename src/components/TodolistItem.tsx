@@ -3,14 +3,16 @@ import {Button} from "./Button.tsx";
 import {useState, type KeyboardEvent, type ChangeEvent} from "react";
 
 type Props = {
+  todolistId:string
   title:string
   tasks: taskType[]
   deleteTask: (taskId:string) => void
   changeTaskStatus: (taskId:string, checked:boolean) => void
   addTask: (inputTitle: string) => void
+  deleteTodolist: (todolistId:string) => void
 };
 export const TodolistItem = (props: Props) => {
-  const {title, tasks, deleteTask, changeTaskStatus, addTask} = props
+  const {todolistId, title, tasks, deleteTask, changeTaskStatus, addTask, deleteTodolist} = props
   const filterBtns:filterType[] = ['all', 'active', 'completed']
   const [inputTitle, setInputTitle] = useState<string>('')
   const [error, setError] = useState<null|string>(null)
@@ -53,9 +55,16 @@ export const TodolistItem = (props: Props) => {
   }
   const filtered = filteredTasks(filter)
 
+  const deleteTodolistHandler = () => {
+    deleteTodolist(todolistId)
+  }
+
   return (
     <div>
-      <h2>{title}</h2>
+      <div>
+        <h2>{title}</h2>
+        <Button title={'x'} onClick={deleteTodolistHandler}/>
+      </div>
       <div>
         <input
           value={inputTitle}
