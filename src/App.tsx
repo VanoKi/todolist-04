@@ -24,7 +24,7 @@ export const App = () => {
     {id:todolistId1, title: 'What to learn', filter: "All"},
     {id:todolistId2, title: 'What to do', filter: "All"}
   ])
-  const [tasks, setTasks] = useState({
+  const [tasks, setTasks] = useState<TaskState>({
     [todolistId1]:[
       { id: nanoid(), title: 'HTML&CSS', isDone: true },
       { id: nanoid(), title: 'JS', isDone: true },
