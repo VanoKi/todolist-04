@@ -1,7 +1,8 @@
 import type {taskType} from "../App.tsx";
 import {Button} from "./Button.tsx";
-import {type ChangeEvent, type KeyboardEvent, useState} from "react";
+import {type ChangeEvent, useState} from "react";
 import {CreateItemForm} from "./CreateItemForm.tsx";
+import {EditableSpan} from "./EditableSpan.tsx";
 
 type Props = {
   todolistId: string
@@ -61,7 +62,7 @@ export const TodolistItem = (props: Props) => {
               checked={task.isDone}
               onChange={changeTaskStatusHandler}
             />
-            <span>{task.title}</span>
+            <EditableSpan value={task.title}/>
             <Button title={'x'} onClick={deleteTaskHandler}/>
           </li>
         )
