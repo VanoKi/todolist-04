@@ -13,6 +13,9 @@ export type Todolist = {
   title:string
   filter:filterType
 }
+export type TaskState = {
+  [key:string]: taskType[]
+}
 
 export const App = () => {
   const todolistId1 = nanoid()
