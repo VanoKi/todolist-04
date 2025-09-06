@@ -25,7 +25,7 @@ export const CreateItemForm = ({onCreateItem}: Props) => {
       setItem('')
     }
   }
-  const changeTaskTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  const changeItemHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setItem(event.currentTarget.value)
     setError(null)
   }
@@ -34,7 +34,7 @@ export const CreateItemForm = ({onCreateItem}: Props) => {
     <div>
       <input value={item}
              onKeyDown={keyDownHandler}
-             onChange={changeTaskTitleHandler}
+             onChange={changeItemHandler}
              className={error ? 'error' : ''}
       />
       <Button title={'+'} onClick={createItemHandler}/>
