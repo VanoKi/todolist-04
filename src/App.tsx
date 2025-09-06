@@ -45,6 +45,10 @@ export const App = () => {
         .map(task => task.id === taskId ? {...task, isDone} : task)})
   }
 
+  const deleteTodolist =(todolistId:string) => {
+    setTodolists(todolists.filter(tl => tl.id !== todolistId))
+  }
+
   return (
     <>
       {todolists.map(tl => {
@@ -57,6 +61,7 @@ export const App = () => {
             deleteTask={deleteTask}
             addTask={addTask}
             changeTaskStatus={changeTaskStatus}
+            deleteTodolist={deleteTodolist}
           />
         )
       })}
