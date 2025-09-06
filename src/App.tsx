@@ -2,6 +2,7 @@ import './App.css'
 import {type filterType, TodolistItem} from "./components/todolistItem.tsx";
 import {nanoid} from "@reduxjs/toolkit";
 import {useState} from "react";
+import {CreateItemForm} from "./components/CreateItemForm.tsx";
 
 export type taskType = {
   id: string
@@ -60,6 +61,7 @@ export const App = () => {
 
   return (
     <>
+      <CreateItemForm onClick={createTodolist}/>
       {todolists.map(tl => {
         return (
           <TodolistItem

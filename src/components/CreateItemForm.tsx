@@ -13,7 +13,7 @@ export const CreateItemForm = ({onClick}: Props) => {
         value={value}
         onChange={(e) => setValue(e.currentTarget.value)}
       />
-      <Button title={'x'} onClick={() => onClick()}/>
+      <Button title={'+'} onClick={() => onClick()}/>
     </div>
   );
 };
