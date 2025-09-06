@@ -20,7 +20,7 @@ export function App() {
 
   const nanoid3 = () => nanoid(3)
   const nanoid5 = () => nanoid(5)
-  const [todolist, setTodolists] = useState<Todolist[]>([
+  const [todolists, setTodolists] = useState<Todolist[]>([
     {id:nanoid5(), title: 'What to learn', filter: "all"},
     {id:nanoid5(), title: 'What to do', filter: "all"}
   ])
@@ -43,13 +43,17 @@ export function App() {
 
   return (
     <>
-      <TodolistItem
-        title={'What to learn'}
-        tasks={tasks}
-        deleteTask={deleteTask}
-        changeTaskStatus={changeTaskStatus}
-        addTask={addTask}
-      />
+      {todolists.map(tl => {
+        return (
+          <TodolistItem
+            title={tl.title}
+            tasks={tasks}
+            deleteTask={deleteTask}
+            changeTaskStatus={changeTaskStatus}
+            addTask={addTask}
+          />
+        )
+      })}
     </>
   )
 }
