@@ -40,13 +40,12 @@ export function App() {
     setTasks({...tasks, [todolistId]:tasks[todolistId].filter(t => t.id !== taskId)})
   }
   const changeTaskStatus = (todolistId:string, taskId:string, checked: boolean) => {
-    // setTasks(tasks.map(task => task.id === taskId ? {...task, isDone: checked } : task))
     setTasks({...tasks, [todolistId]:tasks[todolistId].map(t => t.id === taskId ? {...t, isDone: checked} : t)})
   }
   const addTask =(todolistId:string, inputTitle:string) => {
     const newTask:taskType = {id: nanoid(), title: inputTitle, isDone: false}
     // setTasks([newTask, ...tasks])
-    setTasks({...tasks, [todolistId]:tasks[todolistId]})
+    setTasks({...tasks, [todolistId]:[newTask, ...tasks[todolistId]]})
   }
 
   // const addTodolist = (title:string) => {

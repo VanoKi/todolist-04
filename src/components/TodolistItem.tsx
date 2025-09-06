@@ -21,7 +21,7 @@ export const TodolistItem = (props: Props) => {
   const addTaskHandler = () => {
     const trimmedTitle = inputTitle.trim()
     if (trimmedTitle) {
-      addTask(trimmedTitle)
+      addTask(todolistId, trimmedTitle)
       setInputTitle('')
       setError(null)
     } else {
