@@ -55,8 +55,10 @@ export const App = () => {
     setTasks({...tasks})
   }
   const createTodolist = (todolistTitle:string) => {
-    const newTodolist:Todolist = {id:nanoid(), title: todolistTitle, filter: 'All'}
+    const todolistId = nanoid()
+    const newTodolist:Todolist = {id:todolistId, title: todolistTitle, filter: 'All'}
     setTodolists([newTodolist, ...todolists])
+    setTasks({...tasks, [todolistId]:[]})
   }
 
   return (
