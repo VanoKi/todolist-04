@@ -61,7 +61,7 @@ export const App = () => {
 
   return (
     <>
-      <CreateItemForm onClick={createTodolist}/>
+      <CreateItemForm onCreateItem={createTodolist}/>
       {todolists.map(tl => {
         return (
           <TodolistItem

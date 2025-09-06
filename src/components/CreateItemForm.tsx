@@ -1,19 +1,44 @@
 import {Button} from "./Button.tsx";
-import {useState} from "react";
+import {type ChangeEvent, type KeyboardEvent, useState} from "react";
 
 type Props = {
-  onClick: () => void
+  onCreateItem: (item:string) => void
 };
-export const CreateItemForm = ({onClick}: Props) => {
-  const [value, setValue] = useState('')
+export const CreateItemForm = ({onCreateItem}: Props) => {
+  const [item, setItem] = useState('')
+  const [error, setError] = useState<string | null>(null)
+
+  const createItemHandler = (): void => {
+    const trimmedItem = item.trim()
+    if (trimmedItem !== '') {
+      onCreateItem(trimmedItem)
+      setItem('')
+    } else {
+      setError('Title is required')
+    }
+  }
+  const keyDownHandler = (e:KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      createItemHandler()
+    }
+    if (e.key === 'Escape') {
+      setItem('')
+    }
+  }
+  const changeTaskTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setItem(event.currentTarget.value)
+    setError(null)
+  }
 
   return (
-    <div className={'container'}>
-      <input
-        value={value}
-        onChange={(e) => setValue(e.currentTarget.value)}
+    <div>
+      <input value={item}
+             onKeyDown={keyDownHandler}
+             onChange={changeTaskTitleHandler}
+             className={error ? 'error' : ''}
       />
-      <Button title={'+'} onClick={() => onClick()}/>
+      <Button title={'+'} onClick={createItemHandler}/>
+      {error && <div className={'error-message'}>{error}</div>}
     </div>
   );
 };
