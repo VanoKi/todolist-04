@@ -6,9 +6,9 @@ type Props = {
   todolistId:string
   title:string
   tasks: taskType[]
-  deleteTask: (taskId:string) => void
-  changeTaskStatus: (taskId:string, checked:boolean) => void
-  addTask: (inputTitle: string) => void
+  deleteTask: (todolistId:string,taskId:string) => void
+  changeTaskStatus: (todolistId:string, taskId:string, checked:boolean) => void
+  addTask: (todolistId:string, inputTitle: string) => void
   deleteTodolist: (todolistId:string) => void
 };
 export const TodolistItem = (props: Props) => {
@@ -78,7 +78,7 @@ export const TodolistItem = (props: Props) => {
         {filtered.length > 0 ? (
           filtered.map(task => {
             const deleteTaskHandler = () => {
-              deleteTask(task.id)
+              deleteTask(todolistId, task.id)
             }
             return (
               <li key={task.id}>

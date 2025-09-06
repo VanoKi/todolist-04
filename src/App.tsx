@@ -36,15 +36,18 @@ export function App() {
     ],
   })
 
-  const deleteTask = (taskId:string) => {
-    setTasks(tasks.filter(task => task.id !== taskId))
+  const deleteTask = (todolistId:string, taskId:string) => {
+    // setTasks(tasks.filter(task => task.id !== taskId))
+    setTasks({...tasks, [todolistId]:tasks[todolistId].filter(t => t.id !== taskId)})
   }
-  const changeTaskStatus = (taskId:string, checked: boolean) => {
-    setTasks(tasks.map(task => task.id === taskId ? {...task, isDone: checked } : task))
+  const changeTaskStatus = (todolistId:string, taskId:string, checked: boolean) => {
+    // setTasks(tasks.map(task => task.id === taskId ? {...task, isDone: checked } : task))
+
   }
-  const addTask =(inputTitle:string) => {
+  const addTask =(todolistId:string, inputTitle:string) => {
     const newTask:taskType = {id: nanoid(), title: inputTitle, isDone: false}
-    setTasks([newTask, ...tasks])
+    // setTasks([newTask, ...tasks])
+
   }
 
   // const addTodolist = (title:string) => {
