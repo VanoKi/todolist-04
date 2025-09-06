@@ -2,8 +2,9 @@ import {type ChangeEvent, useState} from "react";
 
 type Props = {
   value:string
+  onChange: (title:string) => void
 };
-export const EditableSpan = ({value}: Props) => {
+export const EditableSpan = ({value, onChange}: Props) => {
   const [isEditMode, setIsEditMode] = useState(false)
   const [input, setInput] =useState(value)
 
@@ -12,6 +13,7 @@ export const EditableSpan = ({value}: Props) => {
   }
   const turnOfEditMode = () => {
     setIsEditMode(false)
+    onChange(input)
   }
   const changeTitle = (e:ChangeEvent<HTMLInputElement>) => {
     setInput(e.currentTarget.value)
