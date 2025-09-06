@@ -53,6 +53,10 @@ export const App = () => {
     delete tasks[todolistId]
     setTasks({...tasks})
   }
+  const createTodolist = (todolistTitle:string) => {
+    const newTodolist:Todolist = {id:nanoid(), title: todolistTitle, filter: 'All'}
+    setTodolists([newTodolist, ...todolists])
+  }
 
   return (
     <>
