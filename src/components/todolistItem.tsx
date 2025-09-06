@@ -13,18 +13,21 @@ type Props = {
   changeTaskStatus: (todolistId: string, taskId:string, isDone:boolean) => void
   deleteTodolist: (todolistId:string) => void
   changeTaskTitle: (todolistId:string, taskId:string, title:string) => void
+  changeTodolistTitle: (todolistId:string, title:string) => void
 };
 export type filterType = 'All' | 'Active' | 'Completed'
 
 export const TodolistItem = (props: Props) => {
-  const {todolistId, title, tasks, deleteTask, addTask, changeTaskStatus, deleteTodolist, changeTaskTitle} = props
+  const {todolistId, title, tasks, deleteTask, addTask, changeTaskStatus, deleteTodolist, changeTaskTitle, changeTodolistTitle} = props
   const filters:filterType[] = ['All' , 'Active' , 'Completed']
   const [filter, setFilter] = useState<filterType>('All')
 
   const createTaskHandler = (title:string): void => {
     addTask(todolistId, title)
   }
-
+  const changeTodolistTitleHandler = (title:string) => {
+    changeTodolistTitle(todolistId, title)
+  }
   const filterTasks = (filter:filterType):taskType[] => {
     switch (filter) {
       case 'Active': {
@@ -41,7 +44,9 @@ export const TodolistItem = (props: Props) => {
   return (
     <div>
       <div className={'container'}>
-        <h3>{title}</h3>
+        <h3>
+          <EditableSpan value={title} onChange={changeTodolistTitleHandler}/>
+        </h3>
         <Button title={'x'} onClick={() => deleteTodolist(todolistId)}/>
       </div>
       <CreateItemForm onCreateItem={createTaskHandler}/>
