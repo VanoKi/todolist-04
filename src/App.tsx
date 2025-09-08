@@ -2,6 +2,7 @@ import './App.css'
 import {useState} from "react";
 import {nanoid} from "@reduxjs/toolkit";
 import {TodolistItem} from "./components/TodolistItem.tsx";
+import {CreateForm} from "./components/CreateForm.tsx";
 
 export type filterType = 'all' | 'active' | 'completed'
 export type Todolist ={
@@ -44,19 +45,27 @@ export function App() {
   }
   const addTask =(todolistId:string, inputTitle:string) => {
     const newTask:taskType = {id: nanoid(), title: inputTitle, isDone: false}
-    // setTasks([newTask, ...tasks])
     setTasks({...tasks, [todolistId]:[newTask, ...tasks[todolistId]]})
   }
-
-  // const addTodolist = (title:string) => {
-  //
-  // }
+  const addTodolist = (title:string) => {
+    const newTodolistId = nanoid()
+    const newTodolist = {id:newTodolistId, title, filter: "all"}
+    setTodolists([newTodolist, ...todolists])
+    setTasks({...tasks, [newTodolistId]:[]})
+  }
   const deleteTodolist = (todolistId:string) => {
     setTodolists(todolists.filter(tl => tl.id !== todolistId))
+  }
+  const changeTaskTitle = (todolistId:string, taskId:string, newTitle:string) => {
+    setTasks({...tasks, [todolistId]:tasks[todolistId].map(t => t.id === taskId ? {...t, title: newTitle} : t)})
+  }
+  const changeTodolistTitle = (todolistId:string, title:string) => {
+    setTodolists(todolists.map(tl => tl.id === todolistId ? {...tl, title} : tl))
   }
 
   return (
     <>
+      <CreateForm addItem={addTodolist}/>
       {todolists.map(tl => {
         return (
           <TodolistItem
@@ -66,8 +75,10 @@ export function App() {
             tasks={tasks[tl.id]}
             deleteTask={deleteTask}
             changeTaskStatus={changeTaskStatus}
+            changeTaskTitle={changeTaskTitle}
             addTask={addTask}
             deleteTodolist={deleteTodolist}
+            changeTodolistTitle={changeTodolistTitle}
           />
         )
       })}
