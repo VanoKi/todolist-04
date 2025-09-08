@@ -4,19 +4,6 @@ import {nanoid} from "@reduxjs/toolkit";
 import {TodolistItem} from "./components/TodolistItem.tsx";
 import {CreateForm} from "./components/CreateForm.tsx";
 
-export type filterType = 'all' | 'active' | 'completed'
-export type Todolist ={
-  id:string
-  title:string
-  filter: filterType
-}
-export type taskType = {
-  id:string
-  title:string
-  isDone:boolean
-}
-
-
 export function App() {
 
   const todolistId1 =  nanoid()
