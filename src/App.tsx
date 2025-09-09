@@ -6,6 +6,7 @@ import {useTodolistStore} from "./store.ts";
 export function App() {
   const todolists = useTodolistStore(state => state.todolists)
   const tasks = useTodolistStore(state => state.tasks)
+  const addTodolist = useTodolistStore(state => state.addTodolist)
 
   return (
     <>
