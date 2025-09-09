@@ -79,7 +79,7 @@ export const useTodolistStore = create<State & Actions>((set) => {
       set((state) => {
         const newId = nanoid()
         return {
-          todolists: [...state.todolists, {id:newId, title, filter: 'all'}],
+          todolists: [ {id:newId, title, filter: 'all'}, ...state.todolists],
           tasks: {...state.tasks, [newId]:[]}
         }
       }),
