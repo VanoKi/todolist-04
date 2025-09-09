@@ -24,6 +24,8 @@ type Actions = {
   changeTaskStatus: (todolistId: string, taskId:string, checked:boolean) => void
   addTodolist: (title:string) => void
   deleteTodolist: (todolistId:string) => void
+  changeTaskTitle: (todolistId:string, taskId:string, newTitle:string) => void
+  changeTodolistTitle: (todolistId:string, newTitle:string) => void
 }
 
 export const useTodolistStore = create<State & Actions>((set) => {
@@ -77,7 +79,7 @@ export const useTodolistStore = create<State & Actions>((set) => {
       set((state) => {
         const newId = nanoid()
         return {
-          todolists: [...state.todolists, {id:newId, title, filter: 'all'}]
+          todolists: [...state.todolists, {id:newId, title, filter: 'all'}],
           tasks: {...state.tasks, [newId]:[]}
         }
       }),
@@ -87,7 +89,20 @@ export const useTodolistStore = create<State & Actions>((set) => {
         const newTodolist = state.todolists.filter(tl => tl.id !== todolistId)
         const {[todolistId]: _, ...restTasks} = state.tasks
         return {todolists: newTodolist, tasks: restTasks}
-      })
+      }),
+
+    changeTaskTitle: (todolistId, taskId, newTitle) =>
+      set((state) => ({
+        tasks: {
+          ...state.tasks,
+          [todolistId]:state.tasks[todolistId].map(t => t.id === taskId ? {...t, title: newTitle} : t)
+        }
+      })),
+
+    changeTodolistTitle: (todolistId, newTitle) =>
+      set((state) => ({
+        todolists: state.todolists.map(tl => tl.id === todolistId ? {...tl, title: newTitle} : tl)
+      })),
 
   }
 })

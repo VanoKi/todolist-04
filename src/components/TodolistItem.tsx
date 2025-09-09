@@ -1,22 +1,20 @@
-import type {filterType, taskType} from "../App.tsx";
+import type {filterType, taskType} from "../store.ts";
 import {Button} from "./Button.tsx";
 import {useState} from "react";
 import {EditableSpan} from "./EditableSpan.tsx";
 import {CreateForm} from "./CreateForm.tsx";
+import {useTodolistStore} from "../store.ts";
 
 type Props = {
   todolistId:string
   title:string
   tasks: taskType[]
-  deleteTask: (todolistId:string,taskId:string) => void
-  changeTaskStatus: (todolistId:string, taskId:string, checked:boolean) => void
-  changeTaskTitle: (todolistId:string, taskId:string, newTitle:string) => void
-  addTask: (todolistId:string, inputTitle: string) => void
-  deleteTodolist: (todolistId:string) => void
-  changeTodolistTitle: (todolistId:string, title:string) => void
 };
 export const TodolistItem = (props: Props) => {
-  const {todolistId, title, tasks, deleteTask, changeTaskStatus, changeTaskTitle, addTask, deleteTodolist, changeTodolistTitle} = props
+  const {todolistId, title, tasks} = props
+  const { deleteTodolist, addTask, deleteTask, changeTaskStatus, changeTaskTitle, changeTodolistTitle } =
+    useTodolistStore(state => state)
+
   const filterBtns:filterType[] = ['all', 'active', 'completed']
   const [filter, setFilter] = useState<filterType>('all')
 
