@@ -63,11 +63,12 @@ export const App = () => {
     setTasks({...tasks})
   }
   const createTodolist = (todolistTitle:string) => {
-    const todolistId = nanoid()
-    const newTodolist:Todolist = {id:todolistId, title: todolistTitle, filter: 'All'}
+    // const todolistId = nanoid()
+    // const newTodolist:Todolist = {id:todolistId, title: todolistTitle, filter: 'All'}
     // setTodolists([newTodolist, ...todolists])
-    dispatchTodolists(createTodolistAC(todolistTitle))
-    setTasks({...tasks, [todolistId]:[]})
+    const action = createTodolistAC(todolistTitle)
+    dispatchTodolists(action)
+    setTasks({...tasks, [action.payload.id]:[]})
   }
   const changeTaskTitle = (todolistId:string, taskId:string, title:string) => {
     setTasks({...tasks, [todolistId]:tasks[todolistId].map(task => task.id === taskId ? {...task, title} : task)})
