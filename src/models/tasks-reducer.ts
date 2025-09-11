@@ -6,12 +6,22 @@ const initialState: TaskState = {}
 
 export const taskReducer = (state:TaskState = initialState, action:Actions):TaskState => {
   switch (action.type) {
-    case '' {
-      return state
+    case 'create_todolist': {
+      return {...state, [action.payload.id]:[]}
+    }
+    case 'delete_todolist': {
+      const newState = {...state}
+      delete newState[action.payload.id]
+      return newState
     }
     default:
       return state
   }
 }
 
-type Actions = CreateTodolistAction | DeleteTodolistAction
+export const deleteTaskAC = () => {
+
+}
+
+export type DeleteTaskAction = ReturnType<typeof deleteTaskAC>
+type Actions = CreateTodolistAction | DeleteTodolistAction | DeleteTaskAction
