@@ -14,13 +14,16 @@ export const taskReducer = (state:TaskState = initialState, action:Actions):Task
       delete newState[action.payload.id]
       return newState
     }
+    case 'delete_task': {
+      return {...state, [action.payload.id]:state[action.payload.id].filter(t => t !== action.payload.taskId)}
+    }
     default:
       return state
   }
 }
 
-export const deleteTaskAC = () => {
-
+export const deleteTaskAC = (todolistId:string, taskId:string) => {
+  return {type: 'delete_task', payload: {id: todolistId, taskId}}
 }
 
 export type DeleteTaskAction = ReturnType<typeof deleteTaskAC>

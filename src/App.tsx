@@ -27,10 +27,7 @@ export type TaskState = {
 export const App = () => {
   const todolistId1 = nanoid()
   const todolistId2 = nanoid()
-  // const [todolists, setTodolists] = useState<Todolist[]>([
-  //   {id:todolistId1, title: 'What to learn', filter: "All"},
-  //   {id:todolistId2, title: 'What to do', filter: "All"}
-  // ])
+
   const [todolists, dispatchTodolists] = useReducer(todolistsReducer, [])
   const [tasks, setTasks] = useState<TaskState>({
     [todolistId1]:[
@@ -57,15 +54,11 @@ export const App = () => {
   }
 
   const deleteTodolist =(todolistId:string) => {
-    // setTodolists(todolists.filter(tl => tl.id !== todolistId))
     dispatchTodolists(deleteTodolistAC(todolistId))
     delete tasks[todolistId]
     setTasks({...tasks})
   }
   const createTodolist = (todolistTitle:string) => {
-    // const todolistId = nanoid()
-    // const newTodolist:Todolist = {id:todolistId, title: todolistTitle, filter: 'All'}
-    // setTodolists([newTodolist, ...todolists])
     const action = createTodolistAC(todolistTitle)
     dispatchTodolists(action)
     setTasks({...tasks, [action.payload.id]:[]})
@@ -74,7 +67,6 @@ export const App = () => {
     setTasks({...tasks, [todolistId]:tasks[todolistId].map(task => task.id === taskId ? {...task, title} : task)})
   }
   const changeTodolistTitle = (todolistId:string, title:string) => {
-    // setTodolists(todolists.map(tl => tl.id == todolistId ? {...tl, title} : tl))
     dispatchTodolists(changeTodolistTitleAC(todolistId, title))
   }
 
