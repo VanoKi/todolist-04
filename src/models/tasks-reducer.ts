@@ -21,6 +21,12 @@ export const taskReducer = (state:TaskState = initialState, action:Actions):Task
       const newTask:taskType = {id: nanoid(), title: action.payload.title, isDone: false}
       return { ...state, [action.payload.id]:[newTask, (state[action.payload.id])]}
     }
+    case 'change_task_status': {
+      return {...state, [action.payload.id]:state[action.payload.id].map(t => t.id === action.payload.taskId ? {...t, isDone: action.payload.isDone} : t)}
+    }
+    case 'change_task_title': {
+      return  {...state, [action.payload.id]:state[action.payload.id].map(t => t.id === action.payload.taskId ? {...t, title: action.payload.title} : t)}
+    }
     default:
       return state
   }
